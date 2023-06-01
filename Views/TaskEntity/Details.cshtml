@@ -1,0 +1,188 @@
+﻿@model WebApplication3CURDWithDapperCore6MVC_Demo.Models.TaskEntity
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div>
+    <div class="row ">
+        <div class="col-sm-2">
+            <h1 id="h1Details">Details</h1>
+            <h1 id="h1Edit">Edit</h1>
+            <h1 id="h1Delete">Delete</h1>
+        </div>
+        <div class="col-sm-10 " style="text-align:right">
+            <a id="btnEdit" class="btn btn-sm btn-info">Edit</a>
+            <a id="btnDelete" class="btn btn-sm btn-danger">Delete</a>
+            <a id="btnCancel" class="btn btn-sm btn-danger">Cancel</a>
+        </div>       
+    </div>
+</div>
+<div id="divDetails">
+    <h4>Task</h4>
+    <hr />
+    
+    <dl class="row">
+        
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+    </dl>
+</div>
+
+<div id="divEdit">
+    <h4>Task</h4>
+    <hr />
+<div  class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Name)
+                </dt>
+                <dd class="col-sm-10">
+                    <input asp-for="Name" class="form-control" required />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </dd>
+               
+            </div>
+            <div class="form-group">
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Description)
+                </dt>
+                <dd class="col-sm-10">
+                    <input asp-for="Description" class="form-control" required />
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </dd>
+            </div>
+            <div class="form-group">
+
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Status)
+                </dt>
+                <dd class="col-sm-10">
+                    <select asp-for="Status" class="form-control" required>
+                        <option value="New">New</option>
+                        <option value="In Progress">In Progress</option>
+                        <option value="Completed">Completed</option>
+                    </select>
+                    <span asp-validation-for="Status" class="text-danger"></span>
+                </dd>                
+            </div>
+            <div class="form-group" style="padding-top:20px">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+</div>
+
+<div id="divDelete">
+
+
+    <h3>Are you sure you want to delete this?</h3>
+    <div>
+        <h4>Task</h4>
+        <hr />
+        <dl class="row">
+
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Name)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Name)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Description)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Description)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Status)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Status)
+            </dd>
+        </dl>
+
+        <form asp-action="Delete">
+            <input type="submit" value="Delete" class="btn btn-danger" /> 
+        </form>
+    </div>
+</div>
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+<script src="/lib/jquery/dist/jquery.js"></script>
+
+
+<script>
+    function hideAll() {
+        $("#divDetails").hide();
+        $("#divEdit").hide();
+        $("#divDelete").hide();
+        $("#h1Edit").hide();
+        $("#h1Delete").hide();
+        $("#h1Details").hide();
+        $("#btnCancel").hide();
+        $("#btnEdit").hide();
+        $("#btnDelete").hide();
+    }
+    function showDetails() {
+        $("#h1Details").show();
+        $("#divDetails").show();
+        $("#btnEdit").show();
+        $("#btnDelete").show();
+        $("#btnCancel").hide();
+    }
+    function showDelete() {
+        $("#h1Delete").show();
+        $("#divDelete").show();
+        $("#btnEdit").hide();
+        $("#btnDelete").hide();
+        $("#btnCancel").show();
+    }
+
+    function showEdit() {
+        $("#h1Edit").show();
+        $("#divEdit").show();
+        $("#btnEdit").hide();
+        $("#btnDelete").hide();
+        $("#btnCancel").show();
+    }
+    $(document).ready(function () {
+        hideAll();
+        showDetails();
+        $("#btnCancel").click(function () {
+            hideAll();
+            showDetails();
+        });
+        $("#btnDelete").click(function () {
+            hideAll();
+            showDelete();
+        });
+        $("#btnEdit").click(function () {
+            hideAll();
+            showEdit();
+        });
+    });
+</script>
